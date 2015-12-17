@@ -38,6 +38,7 @@ writing RSA key
 >>> 
 ```
 
+
 Copy the keys from the keys container to the `alpine-jazz-hands` directory (if you haven't cd'ed to anywhere else, you should still be in `alpine-jazz-hands`).
 
 ```
@@ -53,13 +54,18 @@ mv yourname@aol.com-6564e4e0.rsa.pub your-rsa-key.rsa.pub
 
 
 Delete the fake empty package directory and the empty file in there.
-```alpine-jazz-hands/main/PACKAGE```
+```
+alpine-jazz-hands/main/PACKAGE
+```
 
 
 This example will assume you are building a package called `pongo-blender`
 
 Create a directory for your package.
-```mkdir main/pongo-blender```
+```
+mkdir main/pongo-blender
+```
+
 Place your `APKBUILD` file (and any patches) in `alpine-jazz-hands/main/pongo-blender` directory.
 
 *OR* You can even do this:
