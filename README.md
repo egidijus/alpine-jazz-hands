@@ -1,20 +1,26 @@
 # alpine-jazz-hands
+# What
+
+This will allow you to BUILD PUBLISH AND HOST your own APK alpine repo (you know the most popular minimal os for docker images). 
 Docker image for building alpine (apk) packages for your alpine repo. It's easy and nice, and everyone can do it.
 
-# Intro
+# Why
+
 If you have been using docker for a while, you may be getting sick of the massive ubuntu/debian/centos docker images.
 Alpine is a small and nimble Linux distribution, but it may not have all the packages you want.
 
 With this project, you can build your own packages for Alpine Linux! 
 
-# Doing things
+# How
 
-Clone this repo.
+Clone this repo:
+
 ```
-Git clone https://github.com/madedotcom/alpine-jazz-hands.git && cd alpine-jazz-hands
+git clone https://github.com/madedotcom/alpine-jazz-hands.git && cd alpine-jazz-hands
 ```
 
 Next, you will need to generate some RSA keys so you can sign your packages:
+
 ```
 docker run --name keys --entrypoint abuild-keygen -e PACKAGER="Your Name <yourname@aol.com>" andyshinn/alpine-abuild -n
 ```
@@ -92,11 +98,10 @@ You should have your Alpine Linux APK package in `packages/main/x86_64/`.
 
 
 # Caveats and things
-This will loop over all directories in `alpine-jazz-hands/main` and will attempt to build alpine packages for everything it finds.
 
-If things fail for one package, everything should fail.
-
-If you want to troubleshoot things inside the container try something like this.
+* This will loop over all directories in `alpine-jazz-hands/main` and will attempt to build alpine packages for everything it finds.
+* If things fail for one package, everything should fail.
+* If you want to troubleshoot things inside the container try something like this.
 
 ```
 docker build -t "alpine-jazz-hands" .
@@ -106,5 +111,14 @@ docker build -t "alpine-jazz-hands" .
 docker run -it -e RSA_PRIVATE_KEY="$(cat ./your-rsa-key.rsa)" --entrypoint sh --user root -v $(pwd)/your-rsa-key.rsa.pub:/etc/apk/keys/abuild.rsa.pub -v $(pwd):/home/builder/package -v $(pwd)/packages:/home/builder/packages "alpine-jazz-hands"
 ```
 
-Please note, that the entrypoint will not have run, and you can't build packages as root.
+* Please note, that the entrypoint will not have run, and you can't build packages as root.
+
+
+# Q and A
+
+Q: Why is it called `alpine-jazz-hands` ?
+  A: Because I made this and I wanted a fun name. 
+
+
+
 
